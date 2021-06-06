@@ -4,25 +4,41 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.invoice</groupId>
+        <artifactId>invoice-parent-boot</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.invoice.libs</groupId>
+    <artifactId>persistence</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>persistence</name>
+    <description>Invoice Management Persistence Lib</description>
+
     <properties>
-        <version.spring>2.3.4.RELEASE</version.spring>
         <version.h2>1.4.180</version.h2>
         <version.postgresql>42.0.0</version.postgresql>
 
-        <maven.compiler.source>13</maven.compiler.source>
-        <maven.compiler.target>13</maven.compiler.target>
-    </properties>
+        <!--        <maven.compiler.source>13</maven.compiler.source>-->
+        <!--        <maven.compiler.target>13</maven.compiler.target>-->
 
-    <groupId>com.ecommerce.libs</groupId>
-    <artifactId>persistence</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
+        <!--        <spring-boot.version>2.5.1-SNAPSHOT</spring-boot.version>-->
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${version.spring}</version>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
 
         <dependency>
