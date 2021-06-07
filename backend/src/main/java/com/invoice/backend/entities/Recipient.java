@@ -26,8 +26,8 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "tb_issuer")
-public class Issuer {
+@Table(name = "tb_recipient")
+public class Recipient {
 
 	@Id
 	@Type(type = "uuid-char")
@@ -39,10 +39,10 @@ public class Issuer {
 
 	private String fiscalNumber;
 
-	@Column(columnDefinition = "TEXT")
 	private String name;
 
-	private String activity;
+	@Column(columnDefinition = "TEXT")
+	private String address;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	@Builder.Default

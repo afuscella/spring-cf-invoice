@@ -5,8 +5,12 @@ import java.time.Instant;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
@@ -27,8 +31,8 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Builder
 @Entity
-@Table(name = "tb_invoice")
-public class Invoice {
+@Table(name = "tb_invoice_items")
+public class InvoiceItems {
 
 	@Id
 	@Type(type = "uuid-char")
@@ -38,13 +42,23 @@ public class Invoice {
 	@EqualsAndHashCode.Include
 	private UUID uuid;
 
-	private String fiscalNumber;
+	private Integer item;
 
-	private String model;
+	@Column(columnDefinition = "TEXT")
+	private String description;
+
+	private String unitOfMeasure;
+
+	private Integer quantity;
+
+	private BigDecimal priceUnit;
 
 	private BigDecimal total;
 
-	private Instant issuedAt;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "invoice_uuid",
+			referencedColumnName = "uuid")
+	private Invoice invoice;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	@Builder.Default
@@ -53,6 +67,11 @@ public class Invoice {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	@Builder.Default
 	private Instant updatedAt = Instant.now();
+
+	@PrePersist
+	public void prePersist() {
+		total = priceUnit.multiply(new BigDecimal(quantity));
+	}
 
 	@PreUpdate
 	public void preUpdate() {
