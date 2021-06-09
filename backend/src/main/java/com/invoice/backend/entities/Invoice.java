@@ -8,9 +8,12 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
@@ -28,18 +31,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @Builder
 @Entity
+@EqualsAndHashCode(of = { "uuid" })
 @Table(name = "tb_invoice")
 public class Invoice {
 
 	@Id
+	@Column(nullable = false,
+			updatable = false)
 	@Type(type = "uuid-char")
 	@GenericGenerator(name = "UUIDGenerator",
 			strategy = "uuid2")
 	@GeneratedValue(generator = "UUIDGenerator")
-	@EqualsAndHashCode.Include
 	private UUID uuid;
 
 	private String fiscalNumber;
@@ -50,7 +54,16 @@ public class Invoice {
 
 	private Instant issuedAt;
 
-	@OneToMany(mappedBy = "invoice",
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "recipient_uuid")
+	private Recipient recipient;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "issuer_uuid")
+	private Issuer issuer;
+
+	@OneToMany(fetch = FetchType.EAGER,
+			mappedBy = "invoice",
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
 	private Set<InvoiceItems> items = new HashSet<>();

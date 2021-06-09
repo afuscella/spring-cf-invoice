@@ -1,0 +1,12 @@
+INSERT INTO tb_recipient(uuid, fiscal_number, name, address, created_at, updated_at) VALUES ('738564a6-f91a-45d6-bfce-b4d94c099cf9', 'Fuscella Consultoria Filial 0002', 'Fuscella Consultoria', 'V. Metalurgica', now(), now());
+INSERT INTO tb_recipient(uuid, fiscal_number, name, address, created_at, updated_at) VALUES ('6d70a462-226f-469d-aaea-0390811b8e06', 'Fuscella Consultoria Filial 0003', 'Fuscella Consultoria', 'V. Metalurgica', now(), now());
+
+INSERT INTO tb_issuer(uuid, fiscal_number, name, activity, created_at, updated_at) VALUES ('564d2464-fcf7-4c82-aad5-73097ae7d6ba', '1024058000103', 'Fuscella Consultoria Filial 0002', 'Consulting', now(), now());
+INSERT INTO tb_issuer(uuid, fiscal_number, name, activity, created_at, updated_at) VALUES ('7c3e7fb3-3f09-4ee9-99c5-c7609bd19b9c', '1024058000103', 'Fuscella Consultoria Filial 0003', 'Consulting', now(), now());
+
+INSERT INTO tb_invoice (uuid, fiscal_number, model, total, recipient_uuid, issuer_uuid, issued_at, created_at, updated_at) VALUES ('7c3e7fb3-3f09-4ee9-99c5-c7609bd19b9c', '10248058000102', '55', 100.00, '738564a6-f91a-45d6-bfce-b4d94c099cf9', '564d2464-fcf7-4c82-aad5-73097ae7d6ba', NOW(), NOW(), NOW());
+INSERT INTO tb_invoice (uuid, fiscal_number, model, total, recipient_uuid, issuer_uuid, issued_at, created_at, updated_at) VALUES ('a9b257f3-b7c6-4e95-aada-eb2679b8b6dd', '10248058000102', '55', 100.00, '6d70a462-226f-469d-aaea-0390811b8e06', '7c3e7fb3-3f09-4ee9-99c5-c7609bd19b9c', NOW(), NOW(), NOW());
+
+INSERT INTO tb_invoice_items (uuid, invoice_uuid, item, description, unit_of_measure, quantity, price_unit, total, created_at, updated_at) VALUES ('7776802e-55c6-44d1-99c1-95045c9681be', '7c3e7fb3-3f09-4ee9-99c5-c7609bd19b9c', 10, 'Product 10', 'UN', 2.00, 10.00, 20.00, NOW(), NOW());
+INSERT INTO tb_invoice_items (uuid, invoice_uuid, item, description, unit_of_measure, quantity, price_unit, total, created_at, updated_at) VALUES ('e946712e-bbdc-467c-95f4-18baf07e7326', 'a9b257f3-b7c6-4e95-aada-eb2679b8b6dd', 10, 'Product 10', 'UN', 2.00, 10.00, 20.00, NOW(), NOW());
+INSERT INTO tb_invoice_items (uuid, invoice_uuid, item, description, unit_of_measure, quantity, price_unit, total, created_at, updated_at) VALUES ('920f9b0a-adaf-43a4-93e6-c1715fe854c8', 'a9b257f3-b7c6-4e95-aada-eb2679b8b6dd', 20, 'Product 20', 'UN', 4.00, 10.00, 40.00, NOW(), NOW());

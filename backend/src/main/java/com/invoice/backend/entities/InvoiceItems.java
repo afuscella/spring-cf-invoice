@@ -5,7 +5,6 @@ import java.time.Instant;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,9 +27,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @Builder
 @Entity
+@EqualsAndHashCode(of = { "uuid" })
 @Table(name = "tb_invoice_items")
 public class InvoiceItems {
 
@@ -39,7 +38,6 @@ public class InvoiceItems {
 	@GenericGenerator(name = "UUIDGenerator",
 			strategy = "uuid2")
 	@GeneratedValue(generator = "UUIDGenerator")
-	@EqualsAndHashCode.Include
 	private UUID uuid;
 
 	private Integer item;
@@ -55,9 +53,8 @@ public class InvoiceItems {
 
 	private BigDecimal total;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "invoice_uuid",
-			referencedColumnName = "uuid")
+	@ManyToOne
+	@JoinColumn(name = "invoice_uuid")
 	private Invoice invoice;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
