@@ -18,7 +18,7 @@ import com.invoice.backend.services.InvoiceService;
 public class InvoiceController {
 
 	@Autowired
-	InvoiceService invoiceService;
+	private InvoiceService invoiceService;
 
 	@GetMapping
 	public ResponseEntity<InvoiceResponse> findAll() {
