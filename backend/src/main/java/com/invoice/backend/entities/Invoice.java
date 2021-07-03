@@ -62,7 +62,7 @@ public class Invoice {
 	@JoinColumn(name = "issuer_uuid")
 	private Issuer issuer;
 
-	@OneToMany(fetch = FetchType.EAGER,
+	@OneToMany(fetch = FetchType.LAZY,
 			mappedBy = "invoice",
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)

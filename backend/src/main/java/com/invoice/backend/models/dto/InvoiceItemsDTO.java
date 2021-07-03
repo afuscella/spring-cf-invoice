@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.invoice.backend.entities.InvoiceItems;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,8 +32,10 @@ public class InvoiceItemsDTO implements Serializable {
 
 	private BigDecimal total;
 
+	@JsonIgnore
 	private Instant createdAt = Instant.now();
 
+	@JsonIgnore
 	private Instant updatedAt = Instant.now();
 
 	public InvoiceItemsDTO(InvoiceItems invoiceItems) {

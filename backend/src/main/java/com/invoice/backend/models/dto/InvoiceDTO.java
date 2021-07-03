@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.invoice.backend.entities.Invoice;
 import com.invoice.backend.entities.InvoiceItems;
 import lombok.AllArgsConstructor;
@@ -33,8 +34,10 @@ public class InvoiceDTO implements Serializable {
 
 	private List<InvoiceItemsDTO> items = new ArrayList<>();
 
+	@JsonIgnore
 	private Instant createdAt;
 
+	@JsonIgnore
 	private Instant updatedAt;
 
 	public InvoiceDTO(Invoice invoice) {

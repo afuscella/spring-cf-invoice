@@ -28,6 +28,7 @@ public class InvoiceService {
 		return new InvoiceResponse(data);
 	}
 
+	@Transactional(readOnly = true)
 	public InvoiceDTO handleIndex(UUID uuid) {
 		Optional<Invoice> invoiceOptional = invoiceRepository.findById(uuid);
 		Invoice invoiceEntity = invoiceOptional.orElseThrow(ResourceNotFoundException::new);
